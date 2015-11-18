@@ -1,9 +1,28 @@
+@mixin center-transform() {
+	position: fixed;
+	bottom: 50%;
+	right: 50%;
+	transform: translate(50%,50%);
+}
+
 .example {
-	color: red;
-	.module {
-		color: blue;
-		&.green {
-			color: green;
-		}
+	@include center-transform();
+	bottom: 55%;
+	font-family: sans-serif;
+	text-transform: uppercase;
+	font-size: 60px;
+	font-family: 'Amatic SC', cursive;
+	text-align: center;
+	display: block;
+	height: 300px;
+	width: 300px;
+	border-radius: 100%;
+	background: #FC9E54;
+	span {
+		width: 100%;
+		@include center-transform();
 	}
+}
+html {
+	background: #34929A;
 }

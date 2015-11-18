@@ -3,15 +3,22 @@
   "version": "0.0.0",
   "description": "A fun real time multiplayer shooting game.",
   "main": "index.html",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.13.3"
+  },
   "devDependencies": {
+    "del": "^2.1.0",
     "gulp": "^3.9.0",
-    "gulp-clean": "^0.3.1",
+    "gulp-autoprefixer": "^3.1.0",
     "gulp-imagemin": "^2.3.0",
     "gulp-jshint": "^1.11.2",
+    "gulp-load-tasks": "^0.8.4",
     "gulp-minify-css": "^1.2.1",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "gulp-uglifyjs": "^0.6.2",
+    "gulp-util": "^3.0.7",
     "jshint-stylish": "^2.0.1"
   },
   "scripts": {
