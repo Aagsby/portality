@@ -1,0 +1,35 @@
+{
+  "name": "portality",
+  "version": "0.0.0",
+  "description": "A fun real time multiplayer shooting game.",
+  "main": "index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-sass": "^2.0.4",
+    "gulp-uglifyjs": "^0.6.2",
+    "jshint-stylish": "^2.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MonkeyWGlasses/portality.git"
+  },
+  "keywords": [
+    "game",
+    "realtime",
+    "portality"
+  ],
+  "author": "Portality",
+  "license": "proprietary",
+  "bugs": {
+    "url": "https://github.com/MonkeyWGlasses/portality/issues"
+  },
+  "homepage": "https://github.com/MonkeyWGlasses/portality#readme"
+}

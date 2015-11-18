@@ -1,0 +1,9 @@
+.example {
+	color: red;
+	.module {
+		color: blue;
+		&.green {
+			color: green;
+		}
+	}
+}
