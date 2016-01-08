@@ -1,6 +1,6 @@
 var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
 require('gulp-load-tasks')('gulp'); 
+var nodemon = require('gulp-nodemon');
 
 gulp.task('default', ['scss', 'js:client', 'js:server', 'imagemin', 'copy-html'], function() {
 	greet();
@@ -10,9 +10,7 @@ gulp.task('default', ['scss', 'js:client', 'js:server', 'imagemin', 'copy-html']
 	gulp.watch('app/html/**/*.html', ['copy-html']);
 
 	nodemon({ script: 'dist/server.js',
-		watch: false,
-		ext: false,
-		tasks: false
+		watch: 'dist/server.js',
 		 })
 	.on('restart', function () {
 		console.log('Restarted Node Monster!')
