@@ -1,72 +1,18 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Portality</title>
-		<link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="main.min.css">
-	</head>
-	<body>
-		<div class="example">
-			<span>
-				Well, Well,<br>
-				Hello there!
-			</span>
-		</div>
-	</body>
-	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script src="/main.min.js"></script>
-	<script>
-	  var socket = io();
-
-	  function newUser(id) {
-	  	if(!$('#' + id).length) {
-	  		$('body').append('<div class="marker" id="' + id + '"></div>');
-	  		var color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-	  		$('#' + id).css({
-			  	position: 'fixed',
-			  	width: '10px',
-			  	height: '10px',
-			  	background: color,
-			  	top: '0',
-			  	left: '0'
-			  });
-	  	}
-	  	
-	  	
-	  }
-	  
-	  socket.on('new_user',function(msg){
-	  	newUser(msg);
-	  })
-
-	  socket.on('user_gone',function(msg){
-	  	('#' + msg).remve();
-	  })
-	  
-	  socket.on('move',function(msg){
-	  	var data = msg;
-	  	newUser(data.id);
-		$('#' + data.id).css({
-		  	top: data.y + 'px',
-		  	left: data.x + 'px'
-		  });
-	  })
-
-	  function mouseMoveHandler() {
-	  	$(window).on('mousemove',function(e){
-	  		var data = {
-	  			x: e.clientX,
-	  			y: e.clientY
-	  		}
-			$(window).off('mousemove');
-			socket.emit('move', data);
-			setTimeout(mouseMoveHandler,20);
-		})
-	  }
-	  mouseMoveHandler();
-
-	  
-	  
-	</script>
-
+  <head>
+    <title>Portality</title>
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="main.min.css">
+  </head>
+  <body>
+    <div class="example">
+      <span>
+        Well, Well,<br>
+        Hello there!
+      </span>
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="/main.min.js"></script>
 </html>
