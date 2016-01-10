@@ -10,8 +10,10 @@
         var color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
         $('#' + id).css({
           position: 'fixed',
-          width: '10px',
-          height: '10px',
+          width: '30px',
+          height: '30px',
+          borderRadius: '100%',
+          border: '3px solid black',
           background: color,
           top: '0',
           left: '0'

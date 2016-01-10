@@ -23,6 +23,11 @@
 		@include center-transform();
 	}
 }
+
 html {
 	background: #34929A;
+	&, & * {
+		cursor: none;
+	}
 }
+
