@@ -4,8 +4,14 @@ CA.Phaser = CA.Phaser || {};
 
 CA.Phaser.main = (function(){
 
+  var game = null;
+  var players = null;
+
   function init() {
-    var game = new Phaser.Game(1280, 720, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+    if(!$('#phaser-example').length){
+      return;
+    }
+    game = new Phaser.Game(1280, 720, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
     function preload() {
 
@@ -14,9 +20,7 @@ CA.Phaser.main = (function(){
 
     }
 
-    var player;
-    var facing = 'left';
-    var jumpTimer = 0;
+    players = [1];
     var cursors;
     var jumpButton;
     var bg;
@@ -31,88 +35,103 @@ CA.Phaser.main = (function(){
 
       game.physics.arcade.gravity.y = 250;
 
-      player = game.add.sprite(32, 32, 'dude');
-      game.physics.enable(player, Phaser.Physics.ARCADE);
+      for(var i = 0; i < players.length; i++) {
+        players[i] = game.add.sprite(64 + (64 * i), 32, 'dude');
+        game.physics.enable(players[i], Phaser.Physics.ARCADE);
 
-      player.body.bounce.y = 0.2;
-      player.body.collideWorldBounds = true;
-      player.body.setSize(20, 32, 5, 16);
+        players[i].facing = 'right';
+        players[i].body.bounce.y = 0.2;
+        players[i].body.collideWorldBounds = true;
+        players[i].body.setSize(20, 32, 5, 16);
 
-      player.animations.add('left', [0, 1, 2, 3], 10, true);
-      player.animations.add('turn', [4], 20, true);
-      player.animations.add('right', [5, 6, 7, 8], 10, true);
+        players[i].animations.add('left', [0, 1, 2, 3], 10, true);
+        players[i].animations.add('turn', [4], 20, true);
+        players[i].animations.add('right', [5, 6, 7, 8], 10, true);
 
-      cursors = game.input.keyboard.createCursorKeys();
-      jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-
+        cursors = game.input.keyboard.createCursorKeys();
+        jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+      }
     }
 
     function update() {
 
-    // game.physics.arcade.collide(player, layer);
+      for(var i = 0; i < players.length; i++) {
+        players[i].body.velocity.x = 0;
 
-    player.body.velocity.x = 0;
-
-    if (cursors.left.isDown)
-    {
-      player.body.velocity.x = -150;
-
-      if (facing != 'left')
-      {
-        player.animations.play('left');
-        facing = 'left';
-      }
-    }
-    else if (cursors.right.isDown)
-    {
-      player.body.velocity.x = 150;
-
-      if (facing != 'right')
-      {
-        player.animations.play('right');
-        facing = 'right';
-      }
-    }
-    else
-    {
-      if (facing != 'idle')
-      {
-        player.animations.stop();
-
-        if (facing == 'left')
+        if (cursors.left.isDown)
         {
-          player.frame = 0;
+          players[i].body.velocity.x = -150;
+
+          if (players[i].facing != 'left')
+          {
+            players[i].animations.play('left'); 
+            players[i].facing = 'left';
+          }
+        }
+        else if (cursors.right.isDown)
+        {
+          players[i].body.velocity.x = 150;
+
+          if (players[i].facing != 'right')
+          {
+            players[i].animations.play('right');
+            players[i].facing = 'right';
+          }
         }
         else
         {
-          player.frame = 5;
+          if (players[i].facing != 'idle')
+          {
+            players[i].animations.stop();
+
+            if (players[i].facing == 'left')
+            {
+              players[i].frame = 0;
+            }
+            else
+            {
+              players[i].frame = 5;
+            }
+
+            players[i].facing = 'idle';
+          }
         }
 
-        facing = 'idle';
+        if (jumpButton.isDown && players[i].body.onFloor())
+        {
+          players[i].body.velocity.y = -250;
+        }
       }
-    }
-    
-    if (jumpButton.isDown && player.body.onFloor() && game.time.now > jumpTimer)
-    {
-      player.body.velocity.y = -250;
-      jumpTimer = game.time.now + 750;
+
     }
 
+    function render () {
+      game.debug.text(game.time.suggestedFps, 32, 32);
+    }
   }
 
-  function render () {
+  function addPlayer() {
+    if(!game || !players) {
+      return;
+    }
+    var newPlayer = game.add.sprite(64, 32, 'dude');
+    game.physics.enable(newPlayer, Phaser.Physics.ARCADE);
 
-    game.debug.text(game.time.suggestedFps, 32, 32);
+    newPlayer.facing = 'right';
+    newPlayer.body.bounce.y = 0.2;
+    newPlayer.body.collideWorldBounds = true;
+    newPlayer.body.setSize(20, 32, 5, 16);
 
-    // game.debug.text(game.time.physicsElapsed, 32, 32);
-    // game.debug.body(player);
-    // game.debug.bodyInfo(player, 16, 24);
+    newPlayer.animations.add('left', [0, 1, 2, 3], 10, true);
+    newPlayer.animations.add('turn', [4], 20, true);
+    newPlayer.animations.add('right', [5, 6, 7, 8], 10, true);
 
+    players.push(newPlayer);
   }
-}
 
-return {
-  init: init
-};
+  return {
+    init: init,
+    addPlayer: addPlayer
+  };
 
 }());
