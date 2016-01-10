@@ -13,6 +13,10 @@ module.exports = (function() {
       res.sendFile(path.join(GLOBAL.htmlPath + '/landingPage.html'));
     });
 
+    app.get('/game', function (req, res) {
+      res.sendFile(path.join(GLOBAL.htmlPath + '/game.html'));
+    });
+
     app.use(express.static(__dirname + '/../public'));
 
     sync.listen('connection', function(socket){

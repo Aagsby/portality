@@ -39,3 +39,11 @@ html {
 	font-family: 'Amatic SC', cursive;
 	font-size: 24px;
 }
+
+#phaser-example {
+	display: block;
+	text-align: center;
+	canvas {
+		margin: 30px auto;
+	}
+}

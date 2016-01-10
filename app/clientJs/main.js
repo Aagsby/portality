@@ -67,6 +67,8 @@
       });
     }
     mouseMoveHandler();
+
+    CA.Phaser.main.init();
   });
 
 })(); 

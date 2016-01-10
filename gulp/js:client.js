@@ -7,7 +7,7 @@ module.exports = [['clean:js:client'], function() {
 	return gulp.src(['app/clientJs/**/!(main)*.js','app/clientJs/main.js'])
 	.pipe(jshint())
 	.pipe(jshint.reporter('jshint-stylish'))
-	.pipe(addsrc('node_modules/socket.io/node_modules/socket.io-client/socket.io.js'))
+	.pipe(addsrc(['node_modules/socket.io/node_modules/socket.io-client/socket.io.js','node_modules/phaser/dist/phaser.js']))
 	.pipe(uglify('main.min.js', {
 		mangle: false,
 		output: {
