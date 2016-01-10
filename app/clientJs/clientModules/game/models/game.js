@@ -16,12 +16,12 @@ CA.Game = (function() {
     WAITING: 'waiting',
     PLAYING: 'playing',
     OVER: 'over'
-  }
+  };
 
   Game.prototype.addDude = function(name) {
     var dude = new CA.Dude(name);
     this.dudes.push(dude);
-  }
+  };
 
   Game.prototype.addLine = function(startPoint) {
     var line = new CA.Line({startPoint: startPoint});

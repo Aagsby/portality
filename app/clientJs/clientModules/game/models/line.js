@@ -12,7 +12,7 @@ CA.Line = (function() {
   Line.TYPES = {
     PLATFORM: 'platform',
     PORTAL: 'portal'
-  }
+  };
 
   return Line;
 })();

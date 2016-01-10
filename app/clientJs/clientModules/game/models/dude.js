@@ -10,7 +10,7 @@ CA.Dude = (function() {
       y: 0,
       velocity: 0,
       orientation: 90
-    }
+    };
   };
 
   return Dude;
