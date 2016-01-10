@@ -1,2 +1,28 @@
+# system
+.idea
+.DS_Store
+
+# build
 dist
+
+# node.js
 node_modules
+
+# app
+id_rsa*
+
+#credentials
+config/secrets.js
+
+#scss files
+scss/
+.scss
+*.css.map
+.scssc
+.sass-cache/
+
+#working files
+workspace
+
+#log files
+*.log
