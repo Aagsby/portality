@@ -1,42 +1,43 @@
 module.exports = (function() {
 
-	var express = require('express');
-	var app = express();
-	var http = require('http').Server(app);
-	var io = require('socket.io')(http);
-	var path = require('path');
+  var express = require('express');
+  var app = express();
+  var http = require('http').Server(app);
+  var io = require('socket.io')(http);
+  var path = require('path');
+  var sync = require('./sync.js');
+  sync.init(io);
 
-	function init() {
-		app.get('/', function (req, res) {
-			res.sendFile(path.join(GLOBAL.htmlPath + '/landingPage.html'));
-		});
+  function init() {
+    app.get('/', function (req, res) {
+      res.sendFile(path.join(GLOBAL.htmlPath + '/landingPage.html'));
+    });
 
-		app.use(express.static(__dirname + '/../public'));
-		console.log(__dirname + '/../public');
+    app.use(express.static(__dirname + '/../public'));
 
-		io.on('connection', function(socket){
-		  console.log('a user connected');
-		  io.emit('new_user',socket.client.conn.id);
-		  socket.on('move', function(msg){
-		  	msg.id = socket.client.conn.id;
-			  io.emit('move',msg);
-			});
-		  socket.on('disconnect', function() {
-		  	io.emit('user_gone',socket.client.conn.id);
-		  });
-		});
-		
+    sync.listen('connection', function(socket){
+      sync.broadcast('new_user',socket.client.conn.id);
 
-		var server = http.listen(5000, function(){
-		  	var host = server.address().address;
-			var port = server.address().port;
+      sync.listenToSocket(socket, 'move', function(msg){
+        msg.id = socket.client.conn.id;
+        io.emit('move',msg);
+      });
 
-			console.log('Example app listening at http://%s:%s', host, port);
-		});
-	}
+      sync.listenToSocket(socket, 'disconnect', function() {
+        io.emit('user_gone',socket.client.conn.id);
+      });
+    });
 
-	return {
-		init: init
-	};
+    var server = http.listen(5000, function(){
+      var host = server.address().address;
+      var port = server.address().port;
+
+      console.log('ChillAid App listening at http://%s:%s', host, port);
+    });
+  }
+
+  return {
+    init: init
+  };
 
 })();
