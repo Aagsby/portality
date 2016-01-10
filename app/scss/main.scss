@@ -31,3 +31,11 @@ html {
 	}
 }
 
+.company {
+	position: fixed;
+	bottom: 12px;
+	right: 50%;
+	transform: translateX(50%);
+	font-family: 'Amatic SC', cursive;
+	font-size: 24px;
+}
