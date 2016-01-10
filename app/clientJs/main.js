@@ -24,7 +24,7 @@
     });
 
     CA.Sync.listen('user_gone',function(msg){
-      ('#' + msg).remove();
+      $('#' + msg).remove();
     });
 
     CA.Sync.listen('move',function(msg){
