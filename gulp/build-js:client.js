@@ -5,8 +5,7 @@ var uglify = require('gulp-uglifyjs');
 var addsrc = require('gulp-add-src');
 
 module.exports = [['clean:js:client'], function() {
-	return gulp.src(['app/clientJs/**/*.js','!app/clientJS/main.js'])
-  .pipe(addsrc('app/clientJS/main.js'))
+	return gulp.src(['app/clientJs/**/!(main)*.js','app/clientJs/main.js'])
 	.pipe(jshint())
 	.pipe(jshint.reporter('jshint-stylish'))
   .pipe(addsrc('node_modules/socket.io/node_modules/socket.io-client/socket.io.js'))
