@@ -14,6 +14,7 @@
           height: '30px',
           borderRadius: '100%',
           border: '3px solid black',
+          transform: 'translate(-50%,-50%)',
           background: color,
           top: '0',
           left: '0'
