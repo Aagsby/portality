@@ -28,12 +28,23 @@ module.exports = (function() {
       });
     });
 
-    var server = http.listen(5000, function(){
-      var host = server.address().address;
-      var port = server.address().port;
 
-      console.log('ChillAid App listening at http://%s:%s', host, port);
-    });
+    var server = null;
+    if(global.process.env.NODE_ENV === 'staging') {
+      server = http.listen(5001, function(){
+        var host = server.address().address;
+        var port = server.address().port;
+
+        console.log('ChillAid App listening at http://%s:%s', host, port);
+      });
+    } else {
+      server = http.listen(5000, function(){
+        var host = server.address().address;
+        var port = server.address().port;
+
+        console.log('ChillAid App listening at http://%s:%s', host, port);
+      });
+    }
   }
 
   return {
