@@ -30,7 +30,7 @@ module.exports = (function() {
 
 
     var server = null;
-    if(global.process.env.NODE_ENV === 'staging') {
+    if(global.process.env.NODE_ENV !== 'development' && global.process.env.NODE_ENV !== 'production') {
       server = http.listen(5001, function(){
         var host = server.address().address;
         var port = server.address().port;
