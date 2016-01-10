@@ -16,9 +16,18 @@ module.exports = (function() {
 
 		io.on('connection', function(socket){
 		  console.log('a user connected');
+		  io.emit('new_user',socket.client.conn.id);
+		  socket.on('move', function(msg){
+		  	msg.id = socket.client.conn.id;
+			  io.emit('move',msg);
+			});
+		  socket.on('disconnect', function() {
+		  	io.emit('user_gone',socket.client.conn.id);
+		  });
 		});
+		
 
-		var server = http.listen(3000, function(){
+		var server = http.listen(5000, function(){
 		  	var host = server.address().address;
 			var port = server.address().port;
 
