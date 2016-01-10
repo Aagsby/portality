@@ -36,6 +36,22 @@
       });
     });
 
+    var timer;
+    var stoppedData = {x: 0, y: 0};
+
+    function mouseStopped(e){
+        CA.Sync.send('move', stoppedData);
+    }
+
+    window.addEventListener("mousemove",function(e){
+        stoppedData = {
+          x: e.clientX,
+          y: e.clientY
+        };
+        clearTimeout(timer);
+        timer=setTimeout(mouseStopped,25);
+    });
+
     function mouseMoveHandler() {
       $(window).on('mousemove',function(e){
         var data = {
