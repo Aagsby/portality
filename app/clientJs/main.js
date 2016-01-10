@@ -56,12 +56,12 @@
     });
 
     function mouseMoveHandler() {
-      $(window).on('mousemove',function(e){
+      $(window).on('mousemove touchmove',function(e){
         var data = {
           x: e.clientX,
           y: e.clientY
         };
-        $(window).off('mousemove');
+        $(window).off('mousemove touchmove');
         CA.Sync.send('move', data);
         setTimeout(mouseMoveHandler,20);
       });
