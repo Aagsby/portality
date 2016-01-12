@@ -39,6 +39,8 @@
       });
     });
 
+    CA.Ping.init();
+
     var timer;
     var stoppedData = {x: 0, y: 0};
 
