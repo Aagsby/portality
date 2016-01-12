@@ -3,19 +3,23 @@ var CA = CA || {};
 CA.Game = (function() {
   "use strict";
 
-  var Game = function Game(config) {
+  var Game = function Game() {
 
     this.dudes = [];
     this.lines = [];
 
-    this.score = 0;
-    this.state = Game.STATES.WAITING;
+    Game.init();
   };
 
   Game.STATES = {
     WAITING: 'waiting',
     PLAYING: 'playing',
     OVER: 'over'
+  };
+
+  Game.init = function() {
+    this.score = 0;
+    this.state = Game.STATES.WAITING;
   };
 
   Game.prototype.addDude = function(name) {
