@@ -15,7 +15,9 @@ CA.Ping = (function() {
 
   function listen() {
     CA.Sync.listen('receivePing', function(msg) {
-      console.log('Ping:', $.now() - msg);
+      var currentPing = $.now() - msg;
+
+      $('#ping').html(currentPing);
       setTimeout(function(){ ping('abc'); }, 3000);
     });
   }
