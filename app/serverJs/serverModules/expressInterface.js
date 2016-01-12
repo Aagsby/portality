@@ -6,7 +6,10 @@ module.exports = (function() {
   var io = require('socket.io')(http);
   var path = require('path');
   var sync = require('./sync.js');
+  var ping = require('./ping.js');
   sync.init(io);
+  ping.init(sync);
+
 
   function init() {
     app.get('/', function (req, res) {
@@ -26,8 +29,9 @@ module.exports = (function() {
       sync.listenToSocket(socket, 'disconnect', function() {
         io.emit('user_gone',socket.client.conn.id);
       });
-    });
 
+      ping.listenPing(socket);
+    });
 
     var server = null;
     if(global.process.env.NODE_ENV !== 'development' && global.process.env.NODE_ENV !== 'production') {
